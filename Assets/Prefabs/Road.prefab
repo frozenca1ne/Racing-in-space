@@ -357,6 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2962875423137015721}
+  - component: {fileID: 6382304219011095793}
   m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
@@ -392,6 +393,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6382304219011095793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3060371389034520677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6dfb20b7bfde84899a0246accad9dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beginPosition: {fileID: 102832127080554335}
+  endPosition: {fileID: 2768757869539029417}
+  lastElement: {fileID: 5616635947391328300}
+  asteroidPositions:
+  - {fileID: 5004814272951366657}
+  - {fileID: 2607928955224240938}
+  - {fileID: 5745881079970431832}
+  - {fileID: 8968690970906992766}
+  - {fileID: 376258220508665298}
+  - {fileID: 4863002421991605384}
+  - {fileID: 4075335479772502875}
 --- !u!1 &3072843465908969523
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,15 +27,18 @@ public class SpaceshipController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		MoveForward();
-	}
 
+	}
+	private void Update()
+	{
+		SetSpeedBoost();
+	}
 	private void MoveForward()
 	{
 		var inputHorizontal = Input.GetAxis("Horizontal");
 		var direction = new Vector3(inputHorizontal, 0, 0);
 		spaceship.velocity = Vector3.forward * moveForwardSpeed + direction * moveSidewaysSpeed;
-		TiltTheSpaceship(inputHorizontal);
-		SetSpeedBoost();
+		TiltTheSpaceship(inputHorizontal);	
 	}
 	private void TiltTheSpaceship(float inputX)
 	{
