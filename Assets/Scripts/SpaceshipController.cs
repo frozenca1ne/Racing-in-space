@@ -11,6 +11,8 @@ public class SpaceshipController : MonoBehaviour
 	private float moveSidewaysSpeed;
 	private float moveSidewaysLimit;
 	private float rotateAngleCoefficient;
+	private float accelerationTime;
+	private float accelerationCoefficient;
 
 
 	private void Start()
@@ -19,6 +21,8 @@ public class SpaceshipController : MonoBehaviour
 		moveSidewaysSpeed = spaceshipConfig.MoveSidewaysSpeed;
 		moveSidewaysLimit = spaceshipConfig.MoveSidewaysLimit;
 		rotateAngleCoefficient = spaceshipConfig.RotateAngleCoefficient;
+		accelerationTime = spaceshipConfig.AcceletarionTime;
+		accelerationCoefficient = spaceshipConfig.AccelerationCoefficient;
 	}
 	private void FixedUpdate()
 	{
@@ -31,6 +35,7 @@ public class SpaceshipController : MonoBehaviour
 		var direction = new Vector3(inputHorizontal, 0, 0);
 		spaceship.velocity = Vector3.forward * moveForwardSpeed + direction * moveSidewaysSpeed;
 		TiltTheSpaceship(inputHorizontal);
+		SetSpeedBoost();
 	}
 	private void TiltTheSpaceship(float inputX)
 	{
@@ -41,6 +46,16 @@ public class SpaceshipController : MonoBehaviour
 		currentTransform.position = currentPosition;
 		transform.rotation = Quaternion.Euler(0, 0, -inputX * rotateAngleCoefficient);
 	}
+	private void SetSpeedBoost()
+	{
+		if (!Input.GetKeyDown(KeyCode.Space)) return;
+		StartCoroutine(SetAcceleration(accelerationTime, accelerationCoefficient));
 
-
+	}
+	private IEnumerator SetAcceleration(float time, float coefficient)
+	{
+		moveForwardSpeed *= coefficient;
+		yield return new WaitForSeconds(time);
+		moveForwardSpeed /= coefficient;
+	}
 }
