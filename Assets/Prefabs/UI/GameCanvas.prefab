@@ -398,6 +398,10 @@ MonoBehaviour:
   boostSlider: {fileID: 6460486552376568816}
   boostReadyText: {fileID: 789764604386383044}
   boostReadyValue: 3
+  settingsPanel: {fileID: 0}
+  openSettingsButton: {fileID: 3662379828904088886}
+  loseGamePanel: {fileID: 0}
+  openPanelDelay: 1
 --- !u!1 &4433105209309762428
 GameObject:
   m_ObjectHideFlags: 0

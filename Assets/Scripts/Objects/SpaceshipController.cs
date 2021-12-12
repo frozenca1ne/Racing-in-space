@@ -6,9 +6,11 @@ using UnityEngine;
 public class SpaceshipController : MonoBehaviour
 {
 	public static event Action OnBoost;
+	public static event Action OnDie;
 
 	[SerializeField] private Rigidbody spaceship;
 	[SerializeField] private SpaceshipConfig spaceshipConfig;
+	[SerializeField] private SmoothFollow mainCamera;
 
 	private float moveForwardSpeed;
 	private float moveSidewaysSpeed;
@@ -23,6 +25,12 @@ public class SpaceshipController : MonoBehaviour
 	private bool isAlive;
 
 	public static float BoostFilling { get; private set; } = 3f;
+	private void Awake()
+	{
+		isAlive = true;
+		readyForSpeedUp = true;
+		readyForFillBoost = true;
+	}
 
 	private void Start()
 	{
@@ -31,11 +39,7 @@ public class SpaceshipController : MonoBehaviour
 		moveSidewaysLimit = spaceshipConfig.MoveSidewaysLimit;
 		rotateAngleCoefficient = spaceshipConfig.RotateAngleCoefficient;
 		accelerationTime = spaceshipConfig.AcceletarionTime;
-		accelerationCoefficient = spaceshipConfig.AccelerationCoefficient;
-
-		isAlive = true;
-		readyForSpeedUp = true;
-		readyForFillBoost = true;
+		accelerationCoefficient = spaceshipConfig.AccelerationCoefficient;	
 	}
 	private void FixedUpdate()
 	{
@@ -75,10 +79,12 @@ public class SpaceshipController : MonoBehaviour
 	{
 		moveForwardSpeed *= coefficient;
 		AudioManager.Instance.PlayEffect(spaceshipConfig.AccelerationSound);
+		mainCamera.IsZoomBoosted = true;
 		readyForSpeedUp = false;
 		readyForFillBoost = false;
 		yield return new WaitForSeconds(time);
 		moveForwardSpeed /= coefficient;
+		mainCamera.IsZoomBoosted = false;
 		readyForFillBoost = true;
 	}
 	private void FeelBoost()
@@ -106,5 +112,6 @@ public class SpaceshipController : MonoBehaviour
 		AudioManager.Instance.PlayEffect(spaceshipConfig.DieSound);
 		Instantiate(spaceshipConfig.DieParticle, transform.position, Quaternion.identity);
 		gameObject.SetActive(false);
+		OnDie?.Invoke();
 	}
 }

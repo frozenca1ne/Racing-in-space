@@ -2,14 +2,51 @@
 
 public class SmoothFollow : MonoBehaviour
 {
-    public float distance = 10.0f;
-    public float height = 5.0f;
-    public float heightDamping = 2.0f;
-    public float rotationDamping = 3.0f;
-    public Transform target;
+    [SerializeField] private float normalDistance = 10.0f;
+    [SerializeField] private float zoomDistance = 7.0f;
+    [SerializeField] private float normalHeight = 5.0f;
+    [SerializeField] private float zoomHeight = 3.0f;
+    [SerializeField] private float heightDamping = 2.0f;
+    [SerializeField] private float rotationDamping = 3.0f;
+    [SerializeField] private float zoomSpeed = 3f;
+    [SerializeField] private Transform target;
 
-    private void LateUpdate()
+    public bool IsZoomBoosted { get; set; }
+    private float currentDistance;
+    private float currentHeight;
+
+	private void Awake()
+	{
+        IsZoomBoosted = false;
+        currentDistance = normalDistance;
+        currentHeight = normalHeight;
+	}
+	private void LateUpdate()
     {
+        SelectCameraZoom();
+    }
+    private void SelectCameraZoom()
+	{
+       
+        if(IsZoomBoosted == false)
+		{
+            ChangeParametrs(normalDistance, normalHeight);
+            CameraZoom(currentDistance, currentHeight);
+		}
+        else
+		{
+            ChangeParametrs(zoomDistance, zoomHeight);
+            CameraZoom(currentDistance, currentHeight);
+        }
+	}
+    private void ChangeParametrs(float distance,float height)
+	{
+        currentDistance = Mathf.Lerp(currentDistance, distance, Time.deltaTime * zoomSpeed);
+        currentHeight = Mathf.Lerp(currentHeight, height, Time.deltaTime * zoomSpeed);
+	}
+   
+    private void CameraZoom(float distance,float height)
+	{
         // Early out if we don't have a target
         if (!target)
         {

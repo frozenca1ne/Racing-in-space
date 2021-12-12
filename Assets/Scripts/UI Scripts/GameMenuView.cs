@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +18,9 @@ public class GameMenuView : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private CanvasGroup settingsPanel;
     [SerializeField] private Button openSettingsButton;
+    [Header("LoseGame")]
+    [SerializeField] private CanvasGroup loseGamePanel;
+    [SerializeField] private float openPanelDelay = 1f;
 
     private void OnEnable()
 	{
@@ -29,6 +31,7 @@ public class GameMenuView : MonoBehaviour
 
         openSettingsButton.onClick.AddListener(OpenSettingsPanel);
 
+        SpaceshipController.OnDie += OpenLoseGamePanel;
         SpaceshipController.OnBoost += ChangeBoostSlider;
         boostSlider.maxValue = boostReadyValue;
     }
@@ -88,6 +91,17 @@ public class GameMenuView : MonoBehaviour
     private void OpenSettingsPanel()
     {
         settingsPanel.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+    private void OpenLoseGamePanel()
+    {
+        StartCoroutine(OpenPanelWithDelay(openPanelDelay));
+    }
+
+    private IEnumerator OpenPanelWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        loseGamePanel.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
 }
