@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 8556984375119729862}
   - component: {fileID: 6906127199619628759}
   - component: {fileID: 6702271077080036167}
+  - component: {fileID: 9219298671415718881}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -603,6 +604,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &9219298671415718881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7036451259432580781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bafa9f9162cd86419c318f4774668e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelController: {fileID: 0}
+  finalScore: {fileID: 9000152909391076454}
+  finalAsteroids: {fileID: 3074333430125294861}
+  finalTotalTime: {fileID: 4402669388284363450}
+  newRecordText: {fileID: 4001403981904995054}
+  restartLevel: {fileID: 8573054886892404514}
 --- !u!1 &8659185369424859781
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,16 +12,22 @@ public class GameMenuView : MonoBehaviour
     [SerializeField] private Text earnAsteroidsCount;
     [SerializeField] private Text newBestScoreMessage;
     [SerializeField] private float congratsDelay = 2f;
-
     [Header("BoostBar")]
     [SerializeField] private Slider boostSlider;
     [SerializeField] private Text boostReadyText;
     [SerializeField] private float boostReadyValue = 3f;
+    [Header("Settings")]
+    [SerializeField] private CanvasGroup settingsPanel;
+    [SerializeField] private Button openSettingsButton;
 
-	private void OnEnable()
+    private void OnEnable()
 	{
         LevelController.OnScoreChanged += ChangeScore;
         LevelController.OnBestScoreChanged += ChangeBestScore;
+        LevelController.OnTimeInGameChanged += ChangeTime;
+        LevelController.OnAsteroidsCountChanged += ChangeAsteroidsCount;
+
+        openSettingsButton.onClick.AddListener(OpenSettingsPanel);
 
         SpaceshipController.OnBoost += ChangeBoostSlider;
         boostSlider.maxValue = boostReadyValue;
@@ -30,8 +36,14 @@ public class GameMenuView : MonoBehaviour
 	{
         LevelController.OnScoreChanged -= ChangeScore;
         LevelController.OnBestScoreChanged -= ChangeBestScore;
+        LevelController.OnTimeInGameChanged -= ChangeTime;
+        LevelController.OnAsteroidsCountChanged -= ChangeAsteroidsCount;
     }
-    private void ChangeScore(int value)
+	private void Awake()
+	{
+        SetStartBestScore();
+	}
+	private void ChangeScore(int value)
     {
         scoreText.text = $"SCORE : {value }";
     }
@@ -59,5 +71,23 @@ public class GameMenuView : MonoBehaviour
     {
         boostSlider.value = SpaceshipController.BoostFilling;
         boostReadyText.enabled = boostSlider.value >= boostReadyValue;
+    }
+    private void ChangeTime(float value)
+    {
+        timeInGame.text = $"TIME : {value:F2} s.";
+    }
+    private void ChangeAsteroidsCount(int value)
+    {
+        earnAsteroidsCount.text = $"ASTEROIDS : {value}";
+    }
+    private void SetStartBestScore()
+    {
+        var lastBestScore = PlayerPrefs.GetInt("BestScore", 0);
+        bestScoreText.text = $"BEST SCORE : {lastBestScore}";
+    }
+    private void OpenSettingsPanel()
+    {
+        settingsPanel.gameObject.SetActive(true);
+        Time.timeScale = 0;
     }
 }

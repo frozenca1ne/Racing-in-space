@@ -7,16 +7,35 @@ public class LevelController : MonoBehaviour
 {
 	public static event Action<int> OnScoreChanged;
     public static event Action<int> OnBestScoreChanged;
+    public static event Action<float> OnTimeInGameChanged;
+    public static event Action<int> OnAsteroidsCountChanged;
 
     [SerializeField] private int currentScore = 0;
     [SerializeField] private int currentBestScore = 0;
     [SerializeField] private int earnAsteroidsCount = 0;
     [SerializeField] private float timeInGame = 0;
 
+	public  int CurrentScore => currentScore;
+
+	public  int EarnAsteroidsCount => earnAsteroidsCount;
+    public  float TimeInGame => timeInGame;
+
     private bool doublePoints;
     private float scoreTimer;
 
-	private void Start()
+    private void OnEnable()
+    {
+        AsteroidScoreHelper.OnAsteroidsAdd += AddAsteroidsCount;
+        AsteroidScoreHelper.OnAsteroidsPointsAdd += AddPointsToScore;
+    }
+
+    private void OnDisable()
+    {
+        AsteroidScoreHelper.OnAsteroidsAdd -= AddAsteroidsCount;
+        AsteroidScoreHelper.OnAsteroidsPointsAdd -= AddPointsToScore;
+    }
+
+    private void Start()
 	{
         doublePoints = false;
         ResetScores();
@@ -24,6 +43,7 @@ public class LevelController : MonoBehaviour
 	private void Update()
 	{
         SetPointsToScore();
+        SetTimeInGame();
 	}
 	private void SetPointsToScore()
     {
@@ -53,6 +73,17 @@ public class LevelController : MonoBehaviour
         if (currentScore <= lastBestScore) return;
         PlayerPrefs.SetInt("BestScore", currentBestScore);
         OnBestScoreChanged?.Invoke(currentScore);
+    }
+    private void SetTimeInGame()
+    {
+        //adds 1 point every second
+        timeInGame += 1 * Time.deltaTime;
+        OnTimeInGameChanged?.Invoke(timeInGame);
+    }
+    public void AddAsteroidsCount(int value)
+    {
+        earnAsteroidsCount += value;
+        OnAsteroidsCountChanged?.Invoke(earnAsteroidsCount);
     }
     private void ResetScores()
     {
