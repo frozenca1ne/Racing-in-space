@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: settingsPanel
       value: 
       objectReference: {fileID: 1724249348}
+    - target: {fileID: 4092371593925725166, guid: 09ba9dc116d9c45db85d6ef8b172dce2, type: 3}
+      propertyPath: m_Text
+      value: Racing in space
+      objectReference: {fileID: 0}
     - target: {fileID: 4092371594186208071, guid: 09ba9dc116d9c45db85d6ef8b172dce2, type: 3}
       propertyPath: m_Name
       value: StartMenu

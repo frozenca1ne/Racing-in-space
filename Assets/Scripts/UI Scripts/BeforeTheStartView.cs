@@ -1,7 +1,9 @@
 using UnityEngine;
+using System;
 
 public class BeforeTheStartView : MonoBehaviour
 {
+    public static event Action<bool> OnGameStart;
     private void Start()
     {
         Time.timeScale = 0;
@@ -17,5 +19,6 @@ public class BeforeTheStartView : MonoBehaviour
         if (!Input.anyKey) return;
         gameObject.SetActive(false);
         Time.timeScale = 1;
+        OnGameStart?.Invoke(true);
     }
 }

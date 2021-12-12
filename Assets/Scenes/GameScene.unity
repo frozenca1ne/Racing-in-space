@@ -372,6 +372,7 @@ RectTransform:
   - {fileID: 836519394}
   - {fileID: 2052147997}
   - {fileID: 1405578322}
+  - {fileID: 459064979}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -439,12 +440,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459064976}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -960, y: -540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 276384741}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &705507994 stripped
 Light:
@@ -806,6 +807,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7279560334134768158, guid: f337bae0e70d24a129cbebb17e328f23, type: 3}
+      propertyPath: congratsDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279560334134768158, guid: f337bae0e70d24a129cbebb17e328f23, type: 3}
       propertyPath: loseGamePanel
       value: 
       objectReference: {fileID: 836519396}
@@ -1069,10 +1074,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5418310839619262236, guid: c978bc9b78c67ee4dbfb7d882c03fbd2, type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5418310839619262237, guid: c978bc9b78c67ee4dbfb7d882c03fbd2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1147,10 +1148,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 217583444637271466, guid: 8bb900cd4edaad7449218e9b6af88162, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 59bd9508fdf8b164d8904cd9927dcd72, type: 3}
     - target: {fileID: 3765888629357235107, guid: 8bb900cd4edaad7449218e9b6af88162, type: 3}
       propertyPath: m_RootOrder
       value: 6

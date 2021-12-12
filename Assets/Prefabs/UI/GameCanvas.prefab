@@ -394,7 +394,7 @@ MonoBehaviour:
   timeInGame: {fileID: 770373334119496816}
   earnAsteroidsCount: {fileID: 2684956234315408061}
   newBestScoreMessage: {fileID: 6800039079980818815}
-  congratsDelay: 2
+  congratsDelay: 10
   boostSlider: {fileID: 6460486552376568816}
   boostReadyText: {fileID: 789764604386383044}
   boostReadyValue: 3
@@ -838,7 +838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 250}
+  m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8131843873802329812

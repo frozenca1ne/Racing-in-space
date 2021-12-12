@@ -41,6 +41,8 @@ public class GameMenuView : MonoBehaviour
         LevelController.OnBestScoreChanged -= ChangeBestScore;
         LevelController.OnTimeInGameChanged -= ChangeTime;
         LevelController.OnAsteroidsCountChanged -= ChangeAsteroidsCount;
+        SpaceshipController.OnDie -= OpenLoseGamePanel;
+        SpaceshipController.OnBoost -= ChangeBoostSlider;
     }
 	private void Awake()
 	{

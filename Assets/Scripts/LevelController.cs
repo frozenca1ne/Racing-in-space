@@ -14,6 +14,8 @@ public class LevelController : MonoBehaviour
     [SerializeField] private int currentBestScore = 0;
     [SerializeField] private int earnAsteroidsCount = 0;
     [SerializeField] private float timeInGame = 0;
+    [SerializeField] private int normalPoints = 1;
+    [SerializeField] private int boostedPoints = 2;
 
 	public  int CurrentScore => currentScore;
 
@@ -52,12 +54,12 @@ public class LevelController : MonoBehaviour
       
         if (doublePoints == false)
         {
-            AddPointsToScore(1);
+            AddPointsToScore(normalPoints);
             scoreTimer = 0;
         }
         else if (doublePoints)
         {
-            AddPointsToScore(2);
+            AddPointsToScore(boostedPoints);
             scoreTimer = 0;
         }
     }
@@ -71,6 +73,7 @@ public class LevelController : MonoBehaviour
     {
         var lastBestScore = PlayerPrefs.GetInt("BestScore", 0);
         if (currentScore <= lastBestScore) return;
+        currentBestScore = currentScore;
         PlayerPrefs.SetInt("BestScore", currentBestScore);
         OnBestScoreChanged?.Invoke(currentScore);
     }

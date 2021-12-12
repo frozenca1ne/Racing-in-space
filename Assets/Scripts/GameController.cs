@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
 	}
 	private void CheckRoadCount()
 	{
-		if (spawnedRoads.Count < 4) return;
+		if (spawnedRoads.Count < 5) return;
 		Destroy(spawnedRoads[0].gameObject);
 		spawnedRoads.RemoveAt(0);
 	}

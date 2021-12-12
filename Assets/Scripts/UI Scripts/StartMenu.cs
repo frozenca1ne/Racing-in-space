@@ -39,6 +39,7 @@ public class StartMenu : MonoBehaviour
     }
     private void SetStartBestScore()
     {
-        bestScore.text = "BEST SCORE : " + PlayerPrefs.GetInt("BestScore", 0);
+        var currentBestScore = PlayerPrefs.GetInt("BestScore", 0);
+        bestScore.text = "BEST SCORE : " + currentBestScore;
     }
 }

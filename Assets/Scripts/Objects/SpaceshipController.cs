@@ -14,11 +14,6 @@ public class SpaceshipController : MonoBehaviour
 
 	private float moveForwardSpeed;
 	private float moveSidewaysSpeed;
-	private float moveSidewaysLimit;
-	private float rotateAngleCoefficient;
-	private float accelerationTime;
-	private float accelerationCoefficient;
-
 	private const float StartBoostFilling = 3f;
 	private bool readyForSpeedUp;
 	private bool readyForFillBoost;
@@ -27,19 +22,22 @@ public class SpaceshipController : MonoBehaviour
 	public static float BoostFilling { get; private set; } = 3f;
 	private void Awake()
 	{
-		isAlive = true;
 		readyForSpeedUp = true;
 		readyForFillBoost = true;
+	}
+	private void OnEnable()
+	{
+		BeforeTheStartView.OnGameStart += ChangeIsAliveState;
+	}
+	private void OnDisable()
+	{
+		BeforeTheStartView.OnGameStart -= ChangeIsAliveState;
 	}
 
 	private void Start()
 	{
 		moveForwardSpeed = spaceshipConfig.MoveForwardSpeed;
 		moveSidewaysSpeed = spaceshipConfig.MoveSidewaysSpeed;
-		moveSidewaysLimit = spaceshipConfig.MoveSidewaysLimit;
-		rotateAngleCoefficient = spaceshipConfig.RotateAngleCoefficient;
-		accelerationTime = spaceshipConfig.AcceletarionTime;
-		accelerationCoefficient = spaceshipConfig.AccelerationCoefficient;	
 	}
 	private void FixedUpdate()
 	{
@@ -61,18 +59,18 @@ public class SpaceshipController : MonoBehaviour
 	}
 	private void TiltTheSpaceship(float inputX)
 	{
-		var clampedPositionX = Mathf.Clamp(transform.position.x, -moveSidewaysLimit, moveSidewaysLimit);
+		var clampedPositionX = Mathf.Clamp(transform.position.x, -spaceshipConfig.MoveSidewaysLimit, spaceshipConfig.MoveSidewaysLimit);
 		var currentTransform = transform;
 		var currentPosition = transform.position;
 		currentPosition = new Vector3(clampedPositionX, currentPosition.y, currentPosition.z);
 		currentTransform.position = currentPosition;
-		transform.rotation = Quaternion.Euler(0, 0, -inputX * rotateAngleCoefficient);
+		transform.rotation = Quaternion.Euler(0, 0, -inputX * spaceshipConfig.RotateAngleCoefficient);
 	}
 	private void SetSpeedBoost()
 	{
 		if (!Input.GetKeyDown(KeyCode.Space)) return;
 		if (!readyForSpeedUp || !isAlive) return;
-		StartCoroutine(SetAcceleration(accelerationTime, accelerationCoefficient));
+		StartCoroutine(SetAcceleration(spaceshipConfig.AcceletarionTime, spaceshipConfig.AccelerationCoefficient));
 
 	}
 	private IEnumerator SetAcceleration(float time, float coefficient)
@@ -104,6 +102,10 @@ public class SpaceshipController : MonoBehaviour
 				readyForSpeedUp = true;
 			}
 		}
+	}
+	private void ChangeIsAliveState(bool state)
+	{
+		isAlive = state;
 	}
 	private void OnCollisionEnter(Collision collision)
 	{
