@@ -21,6 +21,7 @@ public class LevelController : MonoBehaviour
 
 	public  int EarnAsteroidsCount => earnAsteroidsCount;
     public  float TimeInGame => timeInGame;
+    public int CurrentBestScore => currentBestScore;
 
     private bool doublePoints;
     private float scoreTimer;

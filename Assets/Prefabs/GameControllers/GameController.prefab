@@ -47,6 +47,6 @@ MonoBehaviour:
   roadPrefab: {fileID: 6382304219011095793, guid: 9a8dceff29becdf47ad22e2de220e7c1, type: 3}
   firstRoad: {fileID: 0}
   spawnDistance: 300
-  asteroid: {fileID: 7998415318808598880, guid: c063c2a94b58f0647b38e6f7bdf19e58, type: 3}
+  asteroid: {fileID: 8849553222308772293, guid: c063c2a94b58f0647b38e6f7bdf19e58, type: 3}
   startAsteroidCount: 1
   asteroidCreateRate: 10

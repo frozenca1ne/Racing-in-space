@@ -33,7 +33,6 @@ public class GameMenuView : MonoBehaviour
 
         SpaceshipController.OnDie += OpenLoseGamePanel;
         SpaceshipController.OnBoost += ChangeBoostSlider;
-        boostSlider.maxValue = boostReadyValue;
     }
 	private void OnDisable()
 	{
@@ -47,7 +46,8 @@ public class GameMenuView : MonoBehaviour
 	private void Awake()
 	{
         SetStartBestScore();
-	}
+        boostSlider.maxValue = boostReadyValue;
+    }
 	private void ChangeScore(int value)
     {
         scoreText.text = $"SCORE : {value }";

@@ -18,6 +18,7 @@ public class Asteroid : MonoBehaviour
 	}
 	private void RotateAsteroid()
 	{
+		//free rotation along the axes
 		currentRotateAngle++;
 		var rotationY = Quaternion.AngleAxis(currentRotateAngle, Vector3.up);
 		var rotationX = Quaternion.AngleAxis(currentRotateAngle, Vector3.right);

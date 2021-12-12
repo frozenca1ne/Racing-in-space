@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4fff34bc562d08469a6534ae7e5be1d, type: 3}
   m_Name: Spaceship
   m_EditorClassIdentifier: 
-  moveForwardSpeed: 20
+  moveForwardSpeed: 25
   moveSidewaysSpeed: 10
-  moveSidewaysLimit: 2.5
-  rotateAngleCoefficient: 10
+  moveSidewaysLimit: 3.5
+  rotateAngleCoefficient: 15
   accelerationCoefficient: 2
   accelerationTime: 3
   accelerationSound: {fileID: 8300000, guid: 281e15cc92254794eaf05caf4d044b76, type: 3}

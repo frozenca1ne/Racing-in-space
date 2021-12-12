@@ -59,6 +59,7 @@ public class SpaceshipController : MonoBehaviour
 	}
 	private void TiltTheSpaceship(float inputX)
 	{
+		//limiting the movement of the ship to the sides
 		var clampedPositionX = Mathf.Clamp(transform.position.x, -spaceshipConfig.MoveSidewaysLimit, spaceshipConfig.MoveSidewaysLimit);
 		var currentTransform = transform;
 		var currentPosition = transform.position;

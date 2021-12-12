@@ -26,10 +26,10 @@ public class GameOverView : MonoBehaviour
     {
         finalScore.text = $"FINAL SCORE : {levelController.CurrentScore}";
         finalAsteroids.text = $"ASTEROIDS : {levelController.EarnAsteroidsCount}";
-        finalTotalTime.text = $"TOTAL TIME : {levelController.TimeInGame: F2}";
+        finalTotalTime.text = $"TOTAL TIME : {levelController.TimeInGame:F2}";
 
         var lastBestScore = PlayerPrefs.GetInt("BestScore", 0);
-        if (levelController.CurrentScore <= lastBestScore) return;
+        if (levelController.CurrentBestScore <= lastBestScore) return;
         newRecordText.enabled = true;
     }
 
