@@ -14,6 +14,8 @@ public class SpaceshipController : MonoBehaviour
 	private float accelerationTime;
 	private float accelerationCoefficient;
 
+	private bool isAlive;
+
 
 	private void Start()
 	{
@@ -23,6 +25,8 @@ public class SpaceshipController : MonoBehaviour
 		rotateAngleCoefficient = spaceshipConfig.RotateAngleCoefficient;
 		accelerationTime = spaceshipConfig.AcceletarionTime;
 		accelerationCoefficient = spaceshipConfig.AccelerationCoefficient;
+
+		isAlive = true;
 	}
 	private void FixedUpdate()
 	{
@@ -35,6 +39,7 @@ public class SpaceshipController : MonoBehaviour
 	}
 	private void MoveForward()
 	{
+		if (!isAlive) return;
 		var inputHorizontal = Input.GetAxis("Horizontal");
 		var direction = new Vector3(inputHorizontal, 0, 0);
 		spaceship.velocity = Vector3.forward * moveForwardSpeed + direction * moveSidewaysSpeed;
@@ -60,5 +65,13 @@ public class SpaceshipController : MonoBehaviour
 		moveForwardSpeed *= coefficient;
 		yield return new WaitForSeconds(time);
 		moveForwardSpeed /= coefficient;
+	}
+	private void OnCollisionEnter(Collision collision)
+	{
+		isAlive = false;
+		spaceship.velocity = Vector3.zero;
+		AudioManager.Instance.PlayEffect(spaceshipConfig.DieSound);
+		Instantiate(spaceshipConfig.DieParticle, transform.position, Quaternion.identity);
+		gameObject.SetActive(false);
 	}
 }

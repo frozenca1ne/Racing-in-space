@@ -18,6 +18,6 @@ MonoBehaviour:
   rotateAngleCoefficient: 10
   accelerationCoefficient: 2
   accelerationTime: 3
-  accelerationSound: {fileID: 0}
-  dieParticle: {fileID: 0}
-  dieSound: {fileID: 0}
+  accelerationSound: {fileID: 8300000, guid: 281e15cc92254794eaf05caf4d044b76, type: 3}
+  dieParticle: {fileID: 100006, guid: e076683e0305e35498b8e8834978c0fa, type: 3}
+  dieSound: {fileID: 8300000, guid: 1fd31868d68903d4f9e2c4a3b7ef98f3, type: 3}
