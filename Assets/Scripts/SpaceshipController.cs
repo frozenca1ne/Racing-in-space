@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpaceshipController : MonoBehaviour
 {
+	public static event Action OnBoost;
+
 	[SerializeField] private Rigidbody spaceship;
 	[SerializeField] private SpaceshipConfig spaceshipConfig;
 
@@ -14,8 +17,12 @@ public class SpaceshipController : MonoBehaviour
 	private float accelerationTime;
 	private float accelerationCoefficient;
 
+	private const float StartBoostFilling = 3f;
+	private bool readyForSpeedUp;
+	private bool readyForFillBoost;
 	private bool isAlive;
 
+	public static float BoostFilling { get; private set; } = 3f;
 
 	private void Start()
 	{
@@ -27,10 +34,13 @@ public class SpaceshipController : MonoBehaviour
 		accelerationCoefficient = spaceshipConfig.AccelerationCoefficient;
 
 		isAlive = true;
+		readyForSpeedUp = true;
+		readyForFillBoost = true;
 	}
 	private void FixedUpdate()
 	{
 		MoveForward();
+		FeelBoost();
 
 	}
 	private void Update()
@@ -57,14 +67,37 @@ public class SpaceshipController : MonoBehaviour
 	private void SetSpeedBoost()
 	{
 		if (!Input.GetKeyDown(KeyCode.Space)) return;
+		if (!readyForSpeedUp || !isAlive) return;
 		StartCoroutine(SetAcceleration(accelerationTime, accelerationCoefficient));
 
 	}
 	private IEnumerator SetAcceleration(float time, float coefficient)
 	{
 		moveForwardSpeed *= coefficient;
+		AudioManager.Instance.PlayEffect(spaceshipConfig.AccelerationSound);
+		readyForSpeedUp = false;
+		readyForFillBoost = false;
 		yield return new WaitForSeconds(time);
 		moveForwardSpeed /= coefficient;
+		readyForFillBoost = true;
+	}
+	private void FeelBoost()
+	{
+		if (!isAlive) return;
+		OnBoost?.Invoke();
+
+		if (!readyForFillBoost)
+		{
+			BoostFilling -= Time.deltaTime;
+		}
+		else if (readyForFillBoost && BoostFilling < StartBoostFilling)
+		{
+			BoostFilling += Time.deltaTime;
+			if (BoostFilling >= StartBoostFilling)
+			{
+				readyForSpeedUp = true;
+			}
+		}
 	}
 	private void OnCollisionEnter(Collision collision)
 	{

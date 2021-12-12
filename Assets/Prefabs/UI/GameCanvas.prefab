@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 4224969560463667784}
   - component: {fileID: 984764683910957809}
   - component: {fileID: 5108627450859357002}
+  - component: {fileID: 7279560334134768158}
   m_Layer: 5
   m_Name: GameCanvas
   m_TagString: Untagged
@@ -376,6 +377,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7279560334134768158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656569218526865610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1c28d5f28e485408fc79b8d84f0f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 281968609614485255}
+  bestScoreText: {fileID: 5221660974663246196}
+  timeInGame: {fileID: 770373334119496816}
+  earnAsteroidsCount: {fileID: 2684956234315408061}
+  newBestScoreMessage: {fileID: 6800039079980818815}
+  congratsDelay: 2
+  boostSlider: {fileID: 6460486552376568816}
+  boostReadyText: {fileID: 789764604386383044}
+  boostReadyValue: 3
 --- !u!1 &4433105209309762428
 GameObject:
   m_ObjectHideFlags: 0
